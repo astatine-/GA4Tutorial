@@ -4,7 +4,7 @@
 
 // GA_MEASUREMENT_ID: Replace 'G-XXXXXXXXXX' with your actual Google Analytics 4 Measurement ID.
 // This ID is crucial for sending data to your GA property.
-const GA_MEASUREMENT_ID = 'G-WCH9V9SND7'; // IMPORTANT: Replace with your GA4 Measurement ID
+const GA_MEASUREMENT_ID = 'G-XXXXXXXXXXX'; // IMPORTANT: Replace with your GA4 Measurement ID
 // G-WCH9V9SND7 is the example ID 
 
 // Google Analytics Tag (gtag.js) setup.
