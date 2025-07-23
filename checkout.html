@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Google Analytics Demo</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+    <!-- GA: Google Analytics Script - Loaded from a shared file -->
+    <script src="./analytics.js"></script>
+</head>
+<body class="bg-gray-100 text-gray-900 flex items-center justify-center min-h-screen p-4">
+    <div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full text-center">
+        <h1 class="text-3xl font-bold mb-4">Complete Your Purchase!</h1>
+        <p class="text-gray-700 mb-6">This page simulates the final step of a checkout process. In a real scenario, this would involve payment forms and order summaries.</p>
+
+        <!-- Simulated Order Summary -->
+        <div class="bg-gray-50 p-4 rounded-lg mb-6 text-left">
+            <h2 class="text-xl font-semibold mb-2">Order Summary</h2>
+            <ul class="list-disc list-inside text-gray-700">
+                <li>Awesome Product: $99.99</li>
+                <li>Shipping: $5.00</li>
+                <li class="font-bold">Total: $104.99</li>
+            </ul>
+        </div>
+
+        <!-- CTA Button for Funnel Step 3 (Simulated Purchase) -->
+        <button id="placeOrderButton" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300 ease-in-out">
+            Place Order
+        </button>
+
+        <!-- Back to Product Page Link -->
+        <div class="mt-6">
+            <a href="product.html" class="text-gray-500 hover:underline">&larr; Back to Product Page</a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // GA: Custom Event for "Place Order" button (simulated purchase)
+            const placeOrderButton = document.getElementById('placeOrderButton');
+            if (placeOrderButton) {
+                placeOrderButton.addEventListener('click', function() {
+                    // GA: Send a custom event when the "Place Order" button is clicked.
+                    // This event could signify a successful purchase in a real application.
+                    sendCustomEvent('purchase_complete', {
+                        transaction_id: 'TID_12345_ABC',
+                        value: 104.99,
+                        currency: 'USD',
+                        items: [
+                            {
+                                item_id: 'PROD_XYZ_123',
+                                item_name: 'Awesome Product',
+                                price: 99.99,
+                                quantity: 1
+                            }
+                        ],
+                        page_location: window.location.pathname
+                    });
+
+                    // Optionally, provide user feedback (instead of alert)
+                    const messageDiv = document.createElement('div');
+                    messageDiv.className = 'mt-4 p-3 bg-green-100 text-green-800 rounded-lg';
+                    messageDiv.textContent = 'Order Placed! Thank you for your purchase.';
+                    placeOrderButton.parentNode.insertBefore(messageDiv, placeOrderButton.nextSibling);
+
+                    // Disable button to prevent multiple clicks
+                    placeOrderButton.disabled = true;
+                    placeOrderButton.classList.remove('bg-purple-600', 'hover:bg-purple-700');
+                    placeOrderButton.classList.add('bg-gray-400', 'cursor-not-allowed');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+
